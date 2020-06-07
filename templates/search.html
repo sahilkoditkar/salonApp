@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section class="my-5 py-5">
+    <div class="container">
+        <div class="jumbotron">
+            <form action="/search">
+
+                <div class="form-group">
+                    <label for="date1">From:</label>
+                    <input type="date" id="date1" name="date1" min="2019-01-01" max="2020-12-31">
+                </div>
+                <div class="form-group">
+                    <label for="date2">To:</label>
+                    <input type="date" id="date2" name="date2" min="2019-01-01" max="2020-12-31">
+                </div>
+
+                <button type="submit" class="btn btn-primary">search</button>
+            </form>
+            <div class="alert"></div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Therapy</th>
+                        <th>Staff</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in Entries %}
+                    <tr>
+                        <td>{{ entry.name }}</td>
+                        <td>{{ entry.contact }}</td>
+                        <td>{{ entry.therapy }}</td>
+                        <td>{{ entry.staff }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center p-3">
+            <button id="print" class="btn-success">Print</button>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.getElementById("print").onclick = function () {
+        window.print();
+    };
+</script>
+
+{% endblock %}
